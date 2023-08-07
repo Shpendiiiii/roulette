@@ -31,22 +31,29 @@ def pretty_print_matrix(matrix):
         matrix: The matrix to print.
     """
     console = Console()
-    style = "red"
-    print(s)
+
+    red = "[red]"
+    black = "[black]"
+    is_red = True
+
     for row in matrix:
-            for item in row:
-                if style == "black":
-                    style = "red"
-                else:
-                    style = "red"
-            console.print(" ".join([format(item, "2d") if type(item) == int else item for item in row]), style)
+        formatted_row = []
+        for item in row:
+            color = red if is_red else black
+            item_str = str(item)
+            if isinstance(item, int) and len(item_str) < 2:
+                item_str = " " + item_str
+            if item == 0 or item == "00":
+                color = "[bold green]"
+            formatted_item = f"{color} {item_str}"
+            formatted_row.append(formatted_item)
+            is_red = not is_red
+
+        console.print(" ".join(formatted_row))
 
 
 eu_v1 = generate_matrix_style("EU")
 us_v1 = generate_matrix_style("US")
 
-
 pretty_print_matrix(us_v1)
-
-
-
+pretty_print_matrix(eu_v1)
