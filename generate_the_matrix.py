@@ -52,8 +52,3 @@ def pretty_print_matrix(matrix):
         console.print(" ".join(formatted_row))
 
 
-eu_v1 = generate_matrix_style("EU")
-us_v1 = generate_matrix_style("US")
-
-pretty_print_matrix(us_v1)
-pretty_print_matrix(eu_v1)
