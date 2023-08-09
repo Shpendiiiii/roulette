@@ -1,29 +1,56 @@
+from rich.color import ColorParseError
 from rich.console import Console
 
 
 def generate_pure_matrix():
     main = []
-    ii = 1
+    ii = 0
     for i in range(0, 12):
         seed = []
-        for j in range(3):
+        for j in range(4):
             seed.append(ii)
             ii += 1
         main.append(seed)
     return main
 
 
-def generate_matrix_style(input="EU"):
-    pure_matrix = generate_pure_matrix()
-    if input == 'EU':
-        pure_matrix.insert(0, [0])
-        return pure_matrix
-    else:
-        pure_matrix.insert(0, [0, "00"])
-        return pure_matrix
+def generate_colors(matrix):
+    """
+       Generate the reds and blacks for the matrix
+
+    Args:
+        matrix: the generated matrix (not the one with the 0)
+    """
+    red = "[red]"
+    black = "[black]"
+    is_red = True
+
+    color_dict = {}
+
+    for row in matrix:
+        for item in row:
+            color = black if is_red else red
+            color_dict.update({f"{item}": f"{color}"})
+            is_red = not is_red
+    return color_dict
 
 
-def pretty_print_matrix(matrix):
+matrix = generate_pure_matrix()
+print("the var matrix", matrix)
+
+
+def generate_matrix_style():
+    pure_matrix = generate_colors(matrix)
+
+    pure_matrix.update({"00": "[green]"})
+    return pure_matrix
+
+
+styled_matrix = generate_matrix_style()
+gen = generate_colors(styled_matrix)
+
+
+def pretty_print_matrix(dictionary):
     """
     Print a matrix in a pretty format.
 
@@ -32,23 +59,18 @@ def pretty_print_matrix(matrix):
     """
     console = Console()
 
-    red = "[red]"
-    black = "[black]"
-    is_red = True
+    i = 0
 
-    for row in matrix:
-        formatted_row = []
-        for item in row:
-            color = red if is_red else black
-            item_str = str(item)
-            if isinstance(item, int) and len(item_str) < 2:
-                item_str = " " + item_str
-            if item == 0 or item == "00":
-                color = "[bold green]"
-            formatted_item = f"{color} {item_str}"
-            formatted_row.append(formatted_item)
-            is_red = not is_red
+    for key, value in dictionary.items():
+        if i % 3 == 0:
+            print("\n")
+        space = "\n"
 
-        console.print(" ".join(formatted_row))
+        if len(key) < 2:
+            console.print(f"{value}  {key}", end=" ")
+        else:
+            console.print(f"{value} {key}", end=" ")
+        i += 1
 
 
+pretty_print_matrix(gen)
