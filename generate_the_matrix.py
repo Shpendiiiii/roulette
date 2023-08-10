@@ -4,10 +4,10 @@ from rich.console import Console
 
 def generate_pure_matrix():
     main = []
-    ii = 0
+    ii = 1
     for i in range(0, 12):
         seed = []
-        for j in range(4):
+        for j in range(3):
             seed.append(ii)
             ii += 1
         main.append(seed)
@@ -35,19 +35,9 @@ def generate_colors(matrix):
     return color_dict
 
 
-matrix = generate_pure_matrix()
-print("the var matrix", matrix)
-
-
-def generate_matrix_style():
-    pure_matrix = generate_colors(matrix)
-
+def generate_matrix_style(pure_matrix):
     pure_matrix.update({"00": "[green]"})
     return pure_matrix
-
-
-styled_matrix = generate_matrix_style()
-gen = generate_colors(styled_matrix)
 
 
 def pretty_print_matrix(dictionary):
@@ -73,4 +63,7 @@ def pretty_print_matrix(dictionary):
         i += 1
 
 
-pretty_print_matrix(gen)
+# pure_matrix = generate_pure_matrix()
+# dict_with_colors = generate_colors(pure_matrix)
+# final = pretty_print_matrix(dict_with_colors)
+pretty_print_matrix(generate_colors(generate_pure_matrix()))
