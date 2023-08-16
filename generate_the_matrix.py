@@ -49,7 +49,7 @@ def pretty_print_matrix(dictionary):
     """
     Print a matrix in a pretty format.
 
-    Args: 
+    Args:
         matrix: The matrix to print.
     """
     console = Console()
@@ -71,17 +71,6 @@ def pretty_print_matrix(dictionary):
         elif key != "0" and key != "00":
             console.print(f"{value} {key}", end=" ")
         i += 1
-
-
-# pure_matrix = generate_pure_matrix()
-# dict_with_colors = generate_colors(pure_matrix)
-# final = pretty_print_matrix(dict_with_colors)
-pretty_print_matrix(generate_colors(generate_matrix_style(generate_pure_matrix())))
-print("\n")
-pretty_print_matrix(generate_colors(generate_matrix_style(generate_pure_matrix(), "US")))
-
-
-
 
 
 # print((generate_matrix_style(generate_pure_matrix())))
