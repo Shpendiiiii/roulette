@@ -4,6 +4,7 @@ from rich.prompt import Prompt
 from rich.prompt import Confirm
 import rich
 import random
+from dummy_loading import loading_animation
 
 console = Console(color_system="truecolor")
 
@@ -40,16 +41,16 @@ def straight_up(is_us):
     else:
         number_chooser = random.randint(0, 36)
 
-    number = Prompt.ask("[green] Choose your number")
-    # console.print("[blue] You chose: ", number)
-    if number_chooser != 37:
-        console.print('[blue bold] Roulette says: ', number_chooser)
+    number = Prompt.ask("[green] \n\n Choose your number")
 
+    loading_animation()
+    if number_chooser != 37:
+        console.print(f"[green] Roulette says: {number_chooser}")
     if str(number_chooser) == str(number):
         console.print("[bold red] You won\n")
     else:
         if str(number_chooser) == "37" and str(number) == "00":
-            console.print('[green] roulette says 00')
+            console.print("[green] roulette says 00")
             console.print("[red] Wow, won!\n")
         console.print("[bold pink] Better luck next time\n")
 
