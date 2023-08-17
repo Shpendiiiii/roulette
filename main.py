@@ -12,13 +12,13 @@ console = Console(color_system="truecolor")
 def welcome_screen():
     is_US = Confirm.ask("Do you want a US styled roulette? Default is European")
     if is_US:
-        colored_dict = generate_colors(
-            generate_matrix_style(generate_pure_matrix(), "US")
-        )
+        matrix = generate_matrix_style(generate_pure_matrix(), "US")
+        colored_dict = generate_colors(matrix)
     else:
-        colored_dict = generate_colors(generate_matrix_style(generate_pure_matrix()))
+        matrix = generate_matrix_style(generate_pure_matrix())
+        colored_dict = generate_colors(matrix)
     pretty_print_matrix(colored_dict)
-    return colored_dict, is_US
+    return matrix, colored_dict, is_US
 
 
 def color_bet(colored_dict):
@@ -42,8 +42,7 @@ def straight_up(is_us):
         number_chooser = random.randint(0, 36)
 
     number = Prompt.ask("[green] \n\n Choose your number")
-
-    loading_animation()
+    loading_animation(random_end=37)
     if number_chooser != 37:
         console.print(f"[green] Roulette says: {number_chooser}")
     if str(number_chooser) == str(number):
@@ -55,9 +54,32 @@ def straight_up(is_us):
         console.print("[bold pink] Better luck next time\n")
 
 
-colored_dict, is_us = welcome_screen()
+def column_bet(is_us):
+    number_chooser = random.randint(0, 36)
+    print("\n")
+    choose_column = Prompt.ask("[green] \nBet on row")
+
+    loading_animation()
+    column = None
+    console.print(f" Roulette says: {number_chooser}")
+    if number_chooser % 3 == 1:
+        column = 1
+    elif number_chooser % 3 == 2:
+        column = 2
+    else:
+        column = 3
+
+    if choose_column == str(column):
+        console.print("[blue] You won!")
+    else:
+        console.print("[red] Better luck next time!")
+        console.print(f"[bold blue] {number_chooser} is in column {column}")
+
+
+matrix, colored_dict, is_us = welcome_screen()
 # print(colored_dict)
 # while True:
 # color_bet(colored_dict)
 while True:
-    straight_up(is_us)
+    # straight_up(is_us)
+    column_bet(is_us)
