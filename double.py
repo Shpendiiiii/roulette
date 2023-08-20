@@ -23,6 +23,13 @@ def double(matrix):
         get_val.append(find_element(matrix, int(choose_doubles[i])))
 
     print(get_val)
+    
+    if get_val[0][0] == get_val[1][0] and get_val[0][1] + 1 == get_val[1][1]:
+        print(choose_doubles, " are neighbors horizontally")
+    elif get_val[0][1] == get_val[1][1] and get_val[0][0] + 1 == get_val[1][0]:
+        print(choose_doubles, " are neighbors vertically")
+    else:
+        print("Not neighbors, try again") 
 
 
 matrix = [
@@ -39,4 +46,5 @@ matrix = [
     [31, 32, 33],
     [34, 35, 36],
 ]
-double(matrix)
+while True:
+    double(matrix)
