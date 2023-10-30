@@ -54,12 +54,24 @@ def straight_up(is_us):
         console.print("[bold pink] Better luck next time\n")
 
 
-def column_bet(is_us):
+def column_bet(is_us, pretty_dict):
     number_chooser = random.randint(0, 36)
     print("\n")
-    choose_column = Prompt.ask("[green] \nBet on row")
+    again_counter = 0
+    while True:
+        choose_column = Prompt.ask("[green] \nBet on column (1, 2, 3)")
+        again_counter += 1
+        try:
+            if 1 <= int(choose_column) <= 3:
+                break
+            else:
+                print("There are only three columns")
+        except ValueError:
+            print("Invalid input. Please enter a number")
+        again_counter += 1
+        print_colored_dict_again(pretty_dict, again_counter)
 
-    loading_animation()
+    # loading_animation()
     column = None
     console.print(f" Roulette says: {number_chooser}")
     if number_chooser % 3 == 1:
@@ -69,17 +81,25 @@ def column_bet(is_us):
     else:
         column = 3
 
-    if choose_column == str(column):
+    if choose_column == column:
         console.print("[blue] You won!")
     else:
         console.print("[red] Better luck next time!")
         console.print(f"[bold blue] {number_chooser} is in column {column}")
 
+    print_colored_dict_again(pretty_dict, again_counter)
+
+
+def print_colored_dict_again(pretty_dict, counter):
+    if counter % 2 == 0:
+        pretty_print_matrix(pretty_dict)
+
 
 matrix, colored_dict, is_us = welcome_screen()
+
 # print(colored_dict)
 # while True:
 # color_bet(colored_dict)
 while True:
     # straight_up(is_us)
-    column_bet(is_us)
+    column_bet(is_us, colored_dict)
