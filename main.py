@@ -90,7 +90,7 @@ def print_colored_dict_again(pretty_dict, counter):
 
 matrix, colored_dict, is_us = welcome_screen()
 
-# print(colored_dict)
+
 # while True:
 # color_bet(colored_dict)
 while True:
