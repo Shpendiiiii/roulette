@@ -55,7 +55,7 @@ def straight_up(is_us):
 
 
 def column_bet(is_us, pretty_dict):
-    number_chooser = random.randint(0, 36)
+    number_chooser = str(random.randint(1, 3))
     print("\n")
     again_counter = 0
     while True:
@@ -71,21 +71,14 @@ def column_bet(is_us, pretty_dict):
         again_counter += 1
         print_colored_dict_again(pretty_dict, again_counter)
 
-    # loading_animation()
-    column = None
-    console.print(f" Roulette says: {number_chooser}")
-    if number_chooser % 3 == 1:
-        column = 1
-    elif number_chooser % 3 == 2:
-        column = 2
-    else:
-        column = 3
+    loading_animation()
 
-    if choose_column == column:
-        console.print("[blue] You won!")
+    if choose_column == number_chooser:
+        print("", end="\r")
+        console.print("[bold blue] You won!")
     else:
         console.print("[red] Better luck next time!")
-        console.print(f"[bold blue] {number_chooser} is in column {column}")
+        console.print(f"[bold blue] Column: {number_chooser}")
 
     print_colored_dict_again(pretty_dict, again_counter)
 
