@@ -2,6 +2,7 @@ import rich
 from rich.prompt import Prompt
 import numpy as np
 import random
+from record_keeping import complete_op_wins, complete_op_losses
 
 
 def find_element(matrix, target):
@@ -56,14 +57,19 @@ matrix = [
     [31, 32, 33],
     [34, 35, 36],
 ]
-while True:
-    is_neighbors, chosen_neighbors = double(matrix)
 
-    if is_neighbors:
-        rand_int = str(random.randint(0, 36))
-        print("Roulette says", rand_int)
-        print("Choosen neighbors", chosen_neighbors)
-        if rand_int in chosen_neighbors:
-            print("[green] YOU WON")
-        else:
-            print("You did not win")
+
+def execute():
+    while True:
+        is_neighbors, chosen_neighbors = double(matrix)
+
+        if is_neighbors:
+            rand_int = str(random.randint(0, 36))
+            print("Roulette says", rand_int)
+            print("Choosen neighbors", chosen_neighbors)
+            if rand_int in chosen_neighbors:
+                print("[green] YOU WON")
+                complete_op_wins()
+            else:
+                print("You did not win")
+                complete_op_losses()

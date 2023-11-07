@@ -5,6 +5,7 @@ from rich.prompt import Confirm
 import rich
 import random
 from dummy_loading import loading_animation
+import double
 
 console = Console(color_system="truecolor")
 
@@ -18,6 +19,7 @@ def welcome_screen():
         matrix = generate_matrix_style(generate_pure_matrix())
         colored_dict = generate_colors(matrix)
     pretty_print_matrix(colored_dict)
+    print("\n")
     return matrix, colored_dict, is_US
 
 
@@ -94,5 +96,6 @@ matrix, colored_dict, is_us = welcome_screen()
 # while True:
 # color_bet(colored_dict)
 while True:
+    double.execute()
     # straight_up(is_us)
-    column_bet(is_us, colored_dict)
+    # column_bet(is_us, colored_dict)
